@@ -5,9 +5,9 @@
 // $db = "smkg6671_wadompet";
 
 $host = "localhost"; 
-$username = "smkg6671_paktaris"; 
-$password = "paktaris"; 
-$database = "smkg6671_db_paktaris"; 
+$user = "smkg6671_paktaris"; 
+$pass = "paktaris"; 
+$db = "smkg6671_db_paktaris"; 
 
 // $host = "localhost";
 // $user = "root";
