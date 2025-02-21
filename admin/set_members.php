@@ -103,6 +103,7 @@ if (isset($_POST['simpanbatal'])) {
 		$tambah = mysqli_query($koneksi, "update tbl_barang set jumlah_brg = jumlah_brg + '".$jumlah_brg."' where id_brg = '".$id_brg."'");
 		$query = mysqli_query($koneksi,"update tbl_ambil set jumlah_brg = jumlah_brg - '".$jumlah_brg."' where id_ambil = '".$row['id_ambil']."'");
 	}else if($jumlah_brg > $row['jumlah_brg']){
+		//Jika jumlah ambil melebihi jumlah di awal ambil
 		echo "<script>
 		alert('Jumlah yang dibatalkan melebihi jumlah ambil di awal!');
 		document.location.href = 'admin.php?page=set_members';

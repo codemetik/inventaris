@@ -6,7 +6,6 @@ if (isset($_POST['simpan'])) {
 
 $brc = $_POST['barcode_brg'];
 $nama_brg = $_POST['nama_brg'];
-$norak_brg = $_POST['norak_brg'];
 $tgl_masuk_brg = $_POST['tgl_masuk_brg'];
 $spec_brg = $_POST['spesifikasi_brg'];
 $id_kategori = $_POST['id_kategori'];
@@ -36,18 +35,18 @@ $data = mysqli_fetch_array($sql);
 
 		// $hist = mysqli_query($koneksi, "insert into tbl_history(id_history, jenis_aktivitas, id_brg, jumlah_brg, tgl_history, waktu_history) values('','".$jenis_activ."','".$id_brg."','".$jumlah_brg."','".$tgl_brg_keluar."','".$waktu_sekarang."');");
 	}else{
-		$insert = mysqli_query($koneksi, "insert into tbl_barang(id_brg, barcode_brg, nama_brg, gambar_brg, norak_brg, tgl_masuk_brg, spesifikasi_brg, id_kategori, jumlah_brg) values('','".$brc."','".$nama_brg."','".$fileName."','".$norak_brg."','".$tgl_masuk_brg."','".$spec_brg."','".$id_kategori."','".$jumlah_brg."')");
+		$insert = mysqli_query($koneksi, "insert into tbl_barang(id_brg, barcode_brg, nama_brg, gambar_brg, tgl_masuk_brg, spesifikasi_brg, id_kategori, jumlah_brg) values('','".$brc."','".$nama_brg."','".$fileName."','".$tgl_masuk_brg."','".$spec_brg."','".$id_kategori."','".$jumlah_brg."')");
 	}
 
 	if ($insert) {
 		echo "<script>
 		alert('Data Berhasil Disimpan');
-		document.location.href = '../?page=barangmasuk';
+		document.location.href = '../../admin.php?page=home';
 		</script>";
 	}else{
 		echo "<script>
 		alert('Data Berhasil Disimpan');
-		document.location.href = '../?page=barangmasuk';
+		document.location.href = '../../admin.php?page=home';
 		</script>";
 	}
 

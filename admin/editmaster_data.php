@@ -36,25 +36,6 @@ if (isset($_GET['id'])) {
 									<td><input type="date" name="tgl_masuk_brg" class="form-control" value="<?= $row['tgl_masuk_brg']; ?>"></td>
 								</tr>
 								<tr>
-									<th class="col-3">No. Rak</th>
-									<td>
-										<select class="form-control" name="norak_brg">
-										<?php 
-										$norak = mysqli_query($koneksi, "select * from tbl_norak");
-										while ($dt = mysqli_fetch_array($norak)) { 
-										if ($row['norak_brg'] == $dt['id_norak']) {
-											$select = 'selected';
-										}else{
-											$select = '';
-										}
-										?>
-											<option value="<?= $dt['id_norak']; ?>" <?= $select; ?>><?= $dt['nomor_norak']; ?></option>	
-										<?php }
-										?>
-										</select>
-									</td>
-								</tr>
-								<tr>
 									<th class="col-3">Spesifikasi barang</th>
 									<td><textarea type="text" name="spesifikasi_brg" class="form-control"><?= $row['spesifikasi_brg']; ?></textarea></td>
 								</tr>
@@ -94,7 +75,7 @@ if (isset($_GET['id'])) {
 								<h6 class="card-title">Klik tombol dibawah untuk menghapus data</h6>
 							</div>
 							<div class="card-body">
-								<a href="?page=editmaster&delete=<?= $row['id_brg']; ?>" class="btn btn-outline-danger" onclick="return confirm('Data ini memiliki stok <?= $row['jumlah_brg']." pcs, "; ?> Jika klik ok, maka data akan terhapus.')">Hapus data ini</a>
+								<a href="admin/proses/proses_deletebarang.php?delete=<?= $row['id_brg']; ?>" class="btn btn-outline-danger" onclick="return confirm('Data ini memiliki stok <?= $row['jumlah_brg']." pcs, "; ?> Jika klik ok, maka data akan terhapus.')">Hapus data ini</a>
 							</div>
 						</div>
 					</div>
@@ -105,43 +86,27 @@ if (isset($_GET['id'])) {
 	</div>
 </div>
 <?php 
+
 if (isset($_POST['simpan'])) {
 	$id_brg = $_POST['id_brg'];
 	$barcode_brg = $_POST['barcode_brg'];
 	$nama_brg = $_POST['nama_brg'];
 	$tgl_masuk_brg = $_POST['tgl_masuk_brg'];
-	$norak = $_POST['norak_brg'];
 	$spesifik_brg = $_POST['spesifikasi_brg'];
 	$kategori_brg = $_POST['kategori_brg'];
 	$jumlah_brg = $_POST['jumlah_brg'];
 
-	$sql = mysqli_query($koneksi, "update tbl_barang set barcode_brg = '".$barcode_brg."', nama_brg = '".$nama_brg."', norak_brg = '".$norak."', tgl_masuk_brg = '".$tgl_masuk_brg."', spesifikasi_brg = '".$spesifik_brg."', id_kategori = '".$kategori_brg."', jumlah_brg = '".$jumlah_brg."' where id_brg = '".$id_brg."'");
+	$sql = mysqli_query($koneksi, "update tbl_barang set barcode_brg = '".$barcode_brg."', nama_brg = '".$nama_brg."', tgl_masuk_brg = '".$tgl_masuk_brg."', spesifikasi_brg = '".$spesifik_brg."', id_kategori = '".$kategori_brg."', jumlah_brg = '".$jumlah_brg."' where id_brg = '".$id_brg."'");
 
 	if ($sql) {
 		echo "<script>
 		alert('Data perubahan berhasil disimpan');
-		document.location.href = '?page=editmaster&id=".$id_brg."';
+		document.location.href = 'admin.php?page=editmaster_data&id=".$id_brg."';
 		</script>";
 	}else{
 		echo "<script>
 		alert('Data perubahan gagal disimpan');
-		document.location.href = '?page=editmaster&id=".$id_brg."';
-		</script>";
-	}
-}else if (isset($_GET['delete'])) {
-	$id_brg = $_GET['delete'];
-
-	$sql = mysqli_query($koneksi, "delete from tbl_barang where id_brg = '".$id_brg."'");
-
-	if ($sql) {
-		echo "<script>
-		alert('Data berhasil dihapus');
-		document.location.href = '?page=database';
-		</script>";
-	}else{
-		echo "<script>
-		alert('Data gagal dihapus');
-		document.location.href = '?page=database';
+		document.location.href = 'admin.php?page=editmaster_data&id=".$id_brg."';
 		</script>";
 	}
 }

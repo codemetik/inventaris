@@ -23,10 +23,6 @@ if (isset($_GET['id'])) {
           <td>: <?= $row['tgl_masuk_brg']; ?></td>
         </tr>
         <tr>
-          <th class="col-3">No. Rak</th>
-          <td>: <?= $row['norak_brg']; ?></td>
-        </tr>
-        <tr>
           <th class="col-3">Spesifikasi Barang</th>
           <td>: <?= $row['spesifikasi_brg']; ?></td>
         </tr>
@@ -83,8 +79,15 @@ if (isset($_GET['id'])) {
                 <input type="text" name="barcode_brg" value="<?= $row['barcode_brg']; ?>">
               </div>
               <div class="form-group">
-                <label>Nama Guru</label>
-                <input type="text" name="nama_guru" class="form-control form-control-sm" placeholder="..." required>
+                <label>Nama User</label>
+                <select class="select2 form-control form-control-sm" name="id_user" required>
+                  <?php 
+                  $user = mysqli_query($koneksi, "select * from tb_user");
+                  while ($r = mysqli_fetch_array($user)) {
+                    echo "<option value='".$r['id_user']."'>".$r['nama_lengkap']."</option>";
+                  }
+                  ?>
+                </select>
               </div>
               <div class="form-group">
                 <label>Tgl barang keluar</label>
@@ -153,11 +156,11 @@ if (isset($_GET['id'])) {
               </div>
               <div class="form-group">
                 <label>Nama Peminjam</label>
-                <select class="select2 form-control form-control-sm" name="nama_peminjam" required>
+                <select class="select2 form-control form-control-sm" name="id_user" required>
                   <?php 
                   $use = mysqli_query($koneksi, "select * from tb_user");
                   while ($row = mysqli_fetch_array($use)) {
-                    echo "<option value='".$row['nama_lengkap']."'>".$row['nama_lengkap']."</option>";
+                    echo "<option value='".$row['id_user']."'>".$row['nama_lengkap']."</option>";
                   }
                   ?>
                 </select>

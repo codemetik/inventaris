@@ -15,7 +15,6 @@
 						<th>Jumlah</th>
 						<th>diPinjam</th>
 						<th>Sisa</th>
-						<th>Tempat Rak</th>
 						<th>Edit</th>
 					</tr>
 				</thead>
@@ -41,8 +40,6 @@
 							echo "<td>".$row['jumlah_brg']."</td>";
 						}
 						?>
-						
-						<td>No. <?= $row['norak_brg']; ?></td>
 						<td><a href="?page=editmaster_data&id=<?= $row['id_brg']; ?>" class="btn bg-cyan">Edit</a></td>
 					</tr>
 				<?php }
@@ -56,7 +53,6 @@
 						<th>Jumlah</th>
 						<th>diPinjam</th>
 						<th>Sisa</th>
-						<th>Tempat Rak</th>
 						<th>Edit</th>
 					</tr>
 				</tfoot>

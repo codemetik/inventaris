@@ -24,7 +24,9 @@
             <?php 
             $no = 1;
             $sql = mysqli_query($koneksi, "select * from tbl_pinjaman x inner join tbl_barang y on y.id_brg = x.id_brg group by id_pinjaman desc");
-            while ($row = mysqli_fetch_array($sql)) { ?>
+            while ($row = mysqli_fetch_array($sql)) { 
+              $user = mysqli_fetch_array(mysqli_query($koneksi, "select * from tb_user where id_user = '".$row['id_user']."'"));
+              ?>
             <tr>
               <td><?= $no++; ?></td>
               <td><?= $row['tgl_pinjam']; ?></td>
@@ -33,7 +35,7 @@
               <td><?= $row['nama_brg']; ?></td>
               <td><?= $row['jumlah_pinjam']; ?></td>
               <td><?= $row['tujuan_gunabarang']; ?></td>
-              <td><?= $row['nama_peminjam']; ?></td>
+              <td><?= $user['nama_lengkap']; ?></td>
               <td><?= $row['organisasi']; ?></td>
               <td><a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-success"><i class="fas fa-journal-whills"></i> Kembalikan</a></td>
             </tr>
@@ -101,15 +103,29 @@ if (isset($_POST['simpankembali'])) {
   $brg = mysqli_fetch_array(mysqli_query($koneksi, "select * from tbl_barang where id_brg = '".$id_brg."'"));
   
   $row = mysqli_fetch_array(mysqli_query($koneksi, "select * from tbl_pinjaman where id_brg = '".$id_brg."' and id_pinjaman = '".$id_pinjaman."'"));
+  //jika ada tiket
+  $sql_tiket = mysqli_num_rows(mysqli_query($koneksi, "select * from tbl_tiketuser where id_brg = '".$brg['id_brg']."' and id_user = '".$row['id_user']."'"));
 
   if ($jumlah_brg == $row['jumlah_pinjam']) {
     //jika jumlah pinjam dikembalikan semua
+
+    //jika ada tiket
+    if($sql_tiket > 0){
+      $eksekusi = mysqli_query($koneksi, "delete from tbl_tiketuser where id_brg = '".$brg['id_brg']."' and id_user = '".$row['id_user']."'");
+    }
+    
     $query = mysqli_query($koneksi, "delete from tbl_pinjaman where id_pinjaman = '".$row['id_pinjaman']."'");
     
     $hist = mysqli_query($koneksi, "insert into tbl_history(id_history, jenis_aktivitas, id_brg, nama_brg, jumlah_brg, tgl_history, waktu_history) values('','".$jenis_activ."','".$id_brg."', '".$brg['nama_brg']."','".$jumlah_brg."','".$tgl_kembali."','".$waktu_sekarang."');");
 
   }else if($jumlah_brg < $row['jumlah_pinjam']){
     //jika jumlah pinjam dikembalikan kurang dari jumlah pinjam di awal
+    
+    //jika ada tikets
+    if($sql_tiket > 0){
+      $eksekusi = mysqli_query($koneksi, "delete from tbl_tiketuser where id_brg = '".$brg['id_brg']."' and id_user = '".$row['id_user']."'");
+    }
+    
     $query = mysqli_query($koneksi,"update tbl_pinjaman set jumlah_pinjam = jumlah_pinjam - '".$jumlah_brg."' where id_pinjaman = '".$row['id_pinjaman']."'");
     $hist = mysqli_query($koneksi, "insert into tbl_history(id_history, jenis_aktivitas, id_brg, nama_brg, jumlah_brg, tgl_history, waktu_history) values('','".$jenis_activ."','".$id_brg."', '".$brg['nama_brg']."','".$jumlah_brg."','".$tgl_kembali."','".$waktu_sekarang."');");
     

@@ -100,7 +100,7 @@ $jmlkas = mysqli_fetch_array($sqlkas);
           </thead>
           <tbody>
             <?php 
-            $sql = mysqli_query($koneksi, "select * from tbl_tiketuser x inner join tbl_barang y on y.id_brg = x.id_brg order by x.id_brg desc");
+            $sql = mysqli_query($koneksi, "select * from tbl_tiketuser x inner join tbl_barang y on y.id_brg = x.id_brg where x.id_user = '".$user['id_user']."' group by x.id_tiketuser desc");
             while ($row = mysqli_fetch_array($sql)) { ?>
               <tr>
                 <td><?= $row['id_tiketuser']; ?></td>

@@ -12,7 +12,7 @@ $db = "smkg6671_db_paktaris";
 // $host = "localhost";
 // $user = "root";
 // $pass = "";
-// $db = "db_inventaris";
+// $db = "db_paktaris";
 
 $koneksi = mysqli_connect($host, $user, $pass, $db) 
 or die('Could not connect : ' . mysqli_connect_error());

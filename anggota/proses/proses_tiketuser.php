@@ -17,12 +17,12 @@ if (isset($_POST['kirimtiket'])) {
 	if ($sql) {
 		echo "<script>
 		alert('DATA TIKET BERHASIL DIKIRIM');
-		document.location.href = '../../anggota.php?page=riwayat_trx';
+		document.location.href = '../../anggota.php?page=home';
 		</script>";
 	}else{
 		echo "<script>
 		alert('DATA TIKET GAGAL DIKIRIM');
-		document.location.href = '../../anggota.php?page=riwayat_trx';
+		document.location.href = '../../anggota.php?page=home';
 		</script>";
 	}
 }

@@ -40,19 +40,6 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="spect" class="col-sm-4 col-form-label">Nomor Rak</label>
-          <div class="col-sm-8">
-            <select class="form-control" name="norak_brg">
-              <?php 
-              $rak = mysqli_query($koneksi, "select * from tbl_norak");
-              while ($dt = mysqli_fetch_array($rak)) { 
-                echo "<option value='".$dt['id_norak']."'>No. Rak: ".$dt['nomor_norak']."</option>";
-              }
-              ?>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
           <label for="spect" class="col-sm-4 col-form-label">Spesifikasi Barang</label>
           <div class="col-sm-8">
             <textarea type="text" class="form-control" id="spect" name="spesifikasi_brg" placeholder="..." required></textarea>

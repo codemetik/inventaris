@@ -4,7 +4,7 @@ include "../../koneksi.php";
 if (isset($_POST['simpanpinjam'])) {
 	$id_brg = $_POST['id_brg'];
 	$barcode_brg = $_POST['barcode_brg'];
-	$nama_peminjam = $_POST['nama_peminjam'];
+	$id_user = $_POST['id_user'];
 	$tgl_pinjam = $_POST['tgl_pinjam'];
 	$jumlah_brg = $_POST['jumlah_brg'];
 	$organisasi = $_POST['organisasi'];
@@ -12,7 +12,7 @@ if (isset($_POST['simpanpinjam'])) {
 
 	$brg = mysqli_fetch_array(mysqli_query($koneksi, "select * from tbl_barang where id_brg = '".$id_brg."'"));
 
-	$sql = mysqli_query($koneksi, "insert into tbl_pinjaman(id_pinjaman, id_brg, nama_peminjam, tgl_pinjam, jumlah_pinjam, organisasi, tujuan_gunabarang) values('','".$id_brg."','".$nama_peminjam."','".$tgl_pinjam."','".$jumlah_brg."','".$organisasi."','".$tujuan_gunabarang."')");
+	$sql = mysqli_query($koneksi, "insert into tbl_pinjaman(id_pinjaman, id_brg, id_user, tgl_pinjam, jumlah_pinjam, organisasi, tujuan_gunabarang) values('','".$id_brg."','".$id_user."','".$tgl_pinjam."','".$jumlah_brg."','".$organisasi."','".$tujuan_gunabarang."')");
 
 	$jenis_activ = "Pinjam";
 	$waktu_sekarang = date('h:i:s');
