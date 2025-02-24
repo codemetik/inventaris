@@ -12,7 +12,15 @@ if (isset($_POST['kirimtiket'])) {
 	$tgl_perkiraan_balik = $_POST['tgl_perkiraan_balik'];
 	$status ='terkirim';
 
-	$sql = mysqli_query($koneksi, "insert into tbl_tiketuser(id_tiketuser, id_user, id_brg, tgl_pinjam, tujuan_gunabarang, jumlah, status, tgl_perkiraan_balik) values('','".$id_user."','".$id_brg."','".$tgl_pinjam."','".$tujuan_gunabarang."', '".$jumlah_brg."', '".$status."','".$tgl_perkiraan_balik."')");
+	$cekstok = mysqli_fetch_array(mysqli_query($koneksi, "select * from tbl_barang where id_brg = '".$id_brg."'"));
+	if($jumlah_brg <= $cekstok['jumlah_brg']){
+		$sql = mysqli_query($koneksi, "insert into tbl_tiketuser(id_tiketuser, id_user, id_brg, tgl_pinjam, tujuan_gunabarang, jumlah, status, tgl_perkiraan_balik) values('','".$id_user."','".$id_brg."','".$tgl_pinjam."','".$tujuan_gunabarang."', '".$jumlah_brg."', '".$status."','".$tgl_perkiraan_balik."')");
+	}else if($jumlah_brg >= $cekstok['jumlah_brg']){
+		echo "<script>
+		alert('JUMLAH BARANG MELEBIHI JUMLAH YANG ADA SAAT INI');
+		document.location.href = '../../anggota.php?page=home';
+		</script>";
+	}
 
 	if ($sql) {
 		echo "<script>

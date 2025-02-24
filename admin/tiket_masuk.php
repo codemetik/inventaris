@@ -95,15 +95,20 @@ if (isset($_POST['ok'])) {
 	if ($status == 'disetujui') {
 		$up = mysqli_query($koneksi, "update tbl_tiketuser set status = '".$status."' where id_tiketuser = '".$id_tiketuser."'");
 		$brg = mysqli_fetch_array(mysqli_query($koneksi, "select * from tbl_barang where id_brg = '".$tiket['id_brg']."'"));
-		$user = mysqli_fetch_array(mysqli_query($koneksi, "select * from tb_user where id_user = '".$tiket['id_user']."'"));
-		if($user['id_organisasi'] == '1'){
+		$userpin = mysqli_fetch_array(mysqli_query($koneksi, "select * from tb_user where id_user = '".$tiket['id_user']."'"));
+		if($userpin['id_organisasi'] == '1'){
 			$organ = 'Guru';
-		}else if($user['id_organisasi'] == '2'){
+		}else if($userpin['id_organisasi'] == '2'){
 			$organ = 'Siswa';
 		}
-		$insert = mysqli_query($koneksi, "insert into tbl_pinjaman(id_pinjaman,	id_brg,	id_user, tgl_pinjam, jumlah_pinjam,	organisasi,	tujuan_gunabarang) values('','".$brg['id_brg']."','".$user['id_user']."','".$tiket['tgl_pinjam']."','".$tiket['jumlah']."','".$organ."','".$tiket['tujuan_gunabarang']."')");
-		
-		if ($up && $insert) {
+		//intunik didapatkan dari kode urut tbl_pinjaman dari file koneksi.php
+		$insert = mysqli_query($koneksi, "insert into tbl_pinjaman(id_pinjaman,	id_brg,	id_user, tgl_pinjam, jumlah_pinjam,	organisasi,	tujuan_gunabarang,status) values('".$intunik."','".$brg['id_brg']."','".$tiket['id_user']."','".$tiket['tgl_pinjam']."','".$tiket['jumlah']."','".$organ."','".$tiket['tujuan_gunabarang']."','dipinjam')");
+		$jenis_activ = "Pinjam";
+		$waktu_sekarang = date('h:i:s');
+		$hist = mysqli_query($koneksi, "insert into tbl_history(id_history, jenis_aktivitas, id_brg, nama_brg, jumlah_brg, tgl_history, waktu_history) values('','".$jenis_activ."','".$brg['id_brg']."', '".$brg['nama_brg']."','".$tiket['jumlah']."','".$tiket['tgl_pinjam']."','".$waktu_sekarang."');");
+		$hist_pinjam = mysqli_query($koneksi, "insert into tbl_history_pinjam(id_histpinjam, id_pinjaman, id_brg, id_user, jumlahbrg_pinjam, jumlahbrg_kembali, tujuan_gunabarang, tgl_pinjam, tgl_perkiraan_balik, tgl_kembali) values('','".$intunik."','".$brg['id_brg']."','".$tiket['id_user']."','".$tiket['jumlah']."','','".$tiket['tujuan_gunabarang']."','".$tiket['tgl_pinjam']."', '".$tiket['tgl_perkiraan_balik']."','')");
+
+		if ($up && $insert && $hist) {
 			echo "<script>
 			alert('TIKET BERHASIL DISETUJUI');
 			document.location.href = 'admin.php?page=tiket_masuk';

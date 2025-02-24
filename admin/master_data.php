@@ -1,12 +1,12 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="card">
-			<div class="card-header bg-indigo">
+			<div class="card-header bg-nav">
 				<h6 class="card-title">Data Barang Inventaris</h6>
 			</div>
 			<div class="card-body">
 				
-			<table id="example1" class="table table-bordered table-striped table-valign-middle table-hover table-dark">
+			<table id="example1" class="table table-bordered table-striped table-valign-middle table-hover">
 				<thead>
 					<tr>
 						<th>Barcode</th>

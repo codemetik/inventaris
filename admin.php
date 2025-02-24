@@ -155,6 +155,18 @@ function rupiah($angka){
               <p>Tiket Masuk</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="?page=aktifitas" class="nav-link text-dark">
+              <i class="nav-icon fas fa-sticky-note"></i>
+              <p>Aktivitas</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="?page=riwayat_pinjam" class="nav-link text-dark">
+              <i class="nav-icon fas fa-history"></i>
+              <p>Riwayat</p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link text-dark">
               <i class="nav-icon fas fa-inbox"></i>
@@ -240,6 +252,12 @@ function rupiah($angka){
                   break;
                 case 'tiket_masuk':
                   include 'admin/tiket_masuk.php';
+                  break;
+                case 'aktifitas';
+                  include 'admin/aktifitas.php';
+                  break;
+                case 'riwayat_pinjam';
+                  include 'admin/riwayat_pinjam.php';
                   break;
                 case 'data_user':
                   include 'admin/data_user.php';

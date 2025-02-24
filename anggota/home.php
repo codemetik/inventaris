@@ -52,7 +52,7 @@ $jmlkas = mysqli_fetch_array($sqlkas);
               <?php 
               $sql = mysqli_query($koneksi, "select * from tbl_barang");
               while ($row = mysqli_fetch_array($sql)) {
-                echo "<option value='".$row['id_brg']."'>".$row['id_brg']." | ".$row['nama_brg']."</option>";
+                echo "<option value='".$row['id_brg']."'>".$row['id_brg']." | ".$row['nama_brg']." | ".$row['jumlah_brg']."</option>";
               }
               ?>
             </select>

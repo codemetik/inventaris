@@ -173,6 +173,10 @@ if (isset($_GET['id'])) {
                 <label>Jumlah Pinjam</label>
                 <input type="number" name="jumlah_brg" class="form-control form-control-sm" placeholder="..." required>
               </div>
+              <div class="form-group">
+                  <label for="tgl_perkiraan_bali">Tgl Perkiraan dikembalikan</label>
+                  <input type="date" name="tgl_perkiraan_balik" class="form-control" require>
+              </div>
             </div>
             <div class="col-sm-6 card p-3 bg-secondary">
               <div class="form-group">

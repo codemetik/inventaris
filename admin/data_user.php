@@ -19,13 +19,14 @@
 							<th>Email</th>
 							<th>No HP/WA</th>
 							<th>Img Profile</th>
-							<th>ID Level</th>
+							<th>Userlevel</th>
+							<th>Organisasi</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php 
 						$no=1;
-						$sql = mysqli_query($koneksi, "select * from tb_user");
+						$sql = mysqli_query($koneksi, "select * from tb_user x inner join leveluser y on y.id_level = x.id_level inner join tbl_organisasi z on z.id_organisasi = x.id_organisasi group by x.id_user desc");
 						while ($row = mysqli_fetch_array($sql)) { ?>
 							<tr>
 								<td><?= $no++; ?></td>
@@ -36,7 +37,8 @@
 								<td><?= $row['email']; ?></td>
 								<td><?= $row['no_whatsapp']; ?></td>
 								<td><?= $row['img_profile']; ?></td>
-								<td><?= $row['id_level']; ?></td>
+								<td><?= $row['name_level']; ?></td>
+								<td><?= $row['nama_organisasi'];  ?></td>
 							</tr>
 						<?php }
 						?>

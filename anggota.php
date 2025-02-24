@@ -176,6 +176,9 @@ function rupiah($angka){
                 case 'riwayat_trx':
                   include "anggota/riwayat_trx.php";
                   break;
+                case 'riwayat_pinjam';
+                  include "anggota/riwayat_pinjam.php";
+                  break;
                 case 'profile':
                   include "anggota/profile_anggota.php";
                   break;
@@ -217,6 +220,15 @@ function rupiah($angka){
                 $bgr = 'bg-dark';
               }
             }
+
+            if (isset($_GET['page']) == 'riwayat_pinjam') {
+              if ($_GET['page'] != 'riwayat_pinjam') {
+                $bgrp = 'bg-white';
+              }else{
+                $bgrp = 'bg-dark';
+              }
+            }
+
             if (isset($_GET['page']) == 'daftar_tiket') {
               if ($_GET['page'] != 'daftar_tiket') {
                 $bgd = 'bg-white';
@@ -257,8 +269,17 @@ function rupiah($angka){
       </a>
       </div>
       <!-- /.col -->
-      <div class="col-6"><a href="?page=riwayat_trx" title="Tiket Pinjam">
+      <div class="col-3"><a href="?page=riwayat_trx" title="Tiket Pinjam">
         <div class="info-box <?= $bgr; ?>">
+          <span class="info-box-icon text-orange"><i class="fas fa-table"></i></span>
+        </div>
+        <!-- /.info-box -->
+      </a>
+      </div>
+      <!-- /.col -->
+
+      <div class="col-3"><a href="?page=riwayat_pinjam" title="Riwayat Pinjam">
+        <div class="info-box <?= $bgrp; ?>">
           <span class="info-box-icon text-orange"><i class="fas fa-table"></i></span>
         </div>
         <!-- /.info-box -->

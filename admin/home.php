@@ -29,7 +29,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-12 p-0">
+  <div class="col-md-12">
     <div class="row">
         <?php 
         if (isset($_POST['search'])) {
@@ -41,14 +41,14 @@
         }
         while ($row = mysqli_fetch_array($sql)) { 
         ?>
-        <div class="col-sm-2">
+        <div class="col-md-2 col-6 m-0">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body p-0">
               <img src="dist/upload_img/<?= $row['gambar_brg']; ?>" class="card-img-top">
             </div>
-            <div class="card-footer bg-radian">
-              <span><?= $row['nama_brg']; ?></span>
-              <a href="admin.php?page=detailbarang&id=<?= $row['id_brg']; ?>" class="btn btn-primary float-right">Detail</a>
+            <div class="card-footer bg-radian p-1">
+              <span class="text-sm"><?= $row['nama_brg']; ?></span>
+              <a href="admin.php?page=detailbarang&id=<?= $row['id_brg']; ?>" class="btn btn-primary float-right text-sm">Detail</a>
             </div>
           </div>
         </div>
